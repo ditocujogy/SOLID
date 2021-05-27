@@ -1,0 +1,354 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SOLID Principles",
+    "description": "this is an api for user registration that uses SOLID principles",
+    "contact": {
+      "name": "API developer",
+      "email": "matheuschaves21@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Creates a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "New user name",
+                    "type": "string"
+                  },
+                  "email": {
+                    "description": "The e-mail of the user",
+                    "type": "string"
+                  }
+                },
+                "required": true
+              },
+              "examples": {
+                "user": {
+                  "summary": "User example",
+                  "value": {
+                    "name": "Jhon Doe",
+                    "email": "jhon-doe@example.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New user successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The new user id",
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "name": {
+                      "description": "The user name",
+                      "type": "string"
+                    },
+                    "admin": {
+                      "description": "True, if the user is an admin",
+                      "type": "boolean"
+                    },
+                    "email": {
+                      "description": "The user e-mail",
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "created_at": {
+                      "description": "The creation date",
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "updated_at": {
+                      "description": "The update date",
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "E-mail already taken",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "description": "An error message",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List all users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "description": "The id of the current user",
+            "style": "simple",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "id": {
+                "description": "An example of logged user id",
+                "value": {
+                  "user_id": "dca648d7-69b0-4dfc-bebd-82944b426e8f"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "description": "The new user id",
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "description": "The user name",
+                        "type": "string"
+                      },
+                      "admin": {
+                        "description": "True, if the user is an admin",
+                        "type": "boolean"
+                      },
+                      "email": {
+                        "description": "The user e-mail",
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "created_at": {
+                        "description": "The creation date",
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "updated_at": {
+                        "description": "The update date",
+                        "type": "string",
+                        "format": "date"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unauthorized operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "description": "An error message",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{user_id}": {
+      "get": {
+        "summary": "Show the user profile",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "summary": "The id of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "id": {
+                "description": "An example of user id",
+                "value": {
+                  "user_id": "dca648d7-69b0-4dfc-bebd-82944b426e8f"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List all users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The new user id",
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "name": {
+                      "description": "The user name",
+                      "type": "string"
+                    },
+                    "admin": {
+                      "description": "True, if the user is an admin",
+                      "type": "boolean"
+                    },
+                    "email": {
+                      "description": "The user e-mail",
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "created_at": {
+                      "description": "The creation date",
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "updated_at": {
+                      "description": "The update date",
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "description": "An error message",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{user_id}/admin": {
+      "patch": {
+        "summary": "Set the user as admin",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "summary": "The id of the user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "examples": {
+              "id": {
+                "description": "An example of user id",
+                "value": {
+                  "user_id": "dca648d7-69b0-4dfc-bebd-82944b426e8f"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The new user id",
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "name": {
+                      "description": "The user name",
+                      "type": "string"
+                    },
+                    "admin": {
+                      "description": "True, if the user is an admin",
+                      "type": "boolean"
+                    },
+                    "email": {
+                      "description": "The user e-mail",
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "created_at": {
+                      "description": "The creation date",
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "updated_at": {
+                      "description": "The update date",
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "description": "An error message",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
