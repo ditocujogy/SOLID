@@ -10,8 +10,11 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/": {
+    "/users": {
       "post": {
+        "tags": [
+          "users"
+        ],
         "summary": "Creates a new user",
         "requestBody": {
           "content": {
@@ -102,6 +105,9 @@
         }
       },
       "get": {
+        "tags": [
+          "users"
+        ],
         "summary": "List all users",
         "parameters": [
           {
@@ -186,8 +192,11 @@
         }
       }
     },
-    "/{user_id}": {
+    "/users/{user_id}": {
       "get": {
+        "tags": [
+          "users"
+        ],
         "summary": "Show the user profile",
         "parameters": [
           {
@@ -268,8 +277,11 @@
         }
       }
     },
-    "/{user_id}/admin": {
+    "/users/{user_id}/admin": {
       "patch": {
+        "tags": [
+          "users"
+        ],
         "summary": "Set the user as admin",
         "parameters": [
           {
